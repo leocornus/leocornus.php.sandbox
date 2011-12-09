@@ -1,6 +1,6 @@
 <?php
 
-class Model_Guestbook {
+class Zendapp_Model_Guestbook {
 
     protected $_comment;
     protected $_created;

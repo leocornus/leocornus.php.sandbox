@@ -1,6 +1,6 @@
 <?php
 
-class Model_GuestbookMapper {
+class Zendapp_Model_GuestbookMapper {
 
     protected $_dbTable;
 
@@ -19,12 +19,12 @@ class Model_GuestbookMapper {
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Model_DbTable_Guestbook');
+            $this->setDbTable('Zendapp_Model_DbTable_Guestbook');
         }
         return $this->_dbTable;
     }
 
-    public function save(Model_Guestbook $guestbook)
+    public function save(Zendapp_Model_Guestbook $guestbook)
     {
         $data = array(
             'email'   => $guestbook->getEmail(),
@@ -40,7 +40,7 @@ class Model_GuestbookMapper {
         }
     }
 
-    public function find($id, Model_Guestbook $guestbook)
+    public function find($id, Zendapp_Model_Guestbook $guestbook)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
@@ -58,7 +58,7 @@ class Model_GuestbookMapper {
         $resultSet = $this->getDbTable()->fetchAll();
         $entries   = array();
         foreach ($resultSet as $row) {
-            $entry = new Model_Guestbook();
+            $entry = new Zendapp_Model_Guestbook();
             $entry->setId($row->id)
                   ->setEmail($row->email)
                   ->setComment($row->comment)

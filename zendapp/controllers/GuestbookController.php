@@ -10,19 +10,19 @@ class GuestbookController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $guestbook = new Model_GuestbookMapper();
+        $guestbook = new Zendapp_Model_GuestbookMapper();
         $this->view->entries = $guestbook->fetchAll();
     }
 
     public function signAction()
     {
         $request = $this->getRequest();
-        $form    = new Form_Guestbook();
+        $form    = new Zendapp_Form_Guestbook();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $comment = new Model_Guestbook($form->getValues());
-                $mapper  = new Model_GuestbookMapper();
+                $comment = new Zendapp_Model_Guestbook($form->getValues());
+                $mapper  = new Zendapp_Model_GuestbookMapper();
                 $mapper->save($comment);
                 return $this->_helper->redirector('index');
             }
