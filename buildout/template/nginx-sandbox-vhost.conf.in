@@ -14,7 +14,7 @@
 
         if (!-e $request_filename) {
             # Zend application zendapp
-            rewrite ^/zendapp/.*$ /zendapp/index.php?q=$1 last;
+            rewrite ^/zendapp/(.*)$ /zendapp/index.php?q=$1 last;
         }
 
         # if the request starts with our frontcontroller, pass it on to fastcgi

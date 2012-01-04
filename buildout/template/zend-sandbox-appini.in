@@ -27,13 +27,14 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 ; logging configuration.
 ; timezone used for logging message.
 logging.timezone = "America/New_York"
-logging.stream.writerName = "Stream"
-logging.stream.writerParams.stream = "${settings:sandbox-zend-logging-file}"
-logging.stream.writerParams.mode = "a"
-logging.stream.filterName = "Priority"
+resources.log.stream.writerName = "Stream"
+resources.log.stream.writerParams.stream = "${settings:sandbox-zend-logging-file}"
+resources.log.stream.writerParams.mode = "a"
+resources.log.stream.filterName = "Priority"
 ; 7 is debug and 1 is critical
-logging.stream.filterParams.priority = ${settings:sandbox-zend-logging-priority}
-logging.stream.formatterParams.format = "%timestamp% %priorityName% (%pid% - %method%): %message%"
+resources.log.stream.filterParams.priority = ${settings:sandbox-zend-logging-priority}
+resources.log.stream.formatterName = "Simple"
+resources.log.stream.formatterParams.format = "%timestamp% %priorityName% : %message%" . PHP_EOL
 
 ; key and value for quick unit testing.
 testingkey = "testing value"

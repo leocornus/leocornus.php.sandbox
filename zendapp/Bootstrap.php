@@ -35,26 +35,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Zend logger requires a timezone setting, otherwise it will through 
         // out a warning message.
         date_default_timezone_set($config->logging->timezone);
-        $writer = new Zend_Log_Writer_Stream($config->logging->stream
-                                             ->writerParams->stream);
-        $filter = new Zend_Log_Filter_Priority((int) $config->logging
-                                               ->stream->filterParams
-                                               ->priority);
-        $formatter = new Zend_Log_Formatter_Simple($config->logging
-                                                   ->stream->formatterParams
-                                                   ->format . PHP_EOL);
-        $writer->setFormatter($formatter);
-        $logger = new Zend_Log($writer);
-        $logger->addFilter($filter);
-        $logger->setEventItem('pid', getmypid());
+        $this->bootstrap('log');
+        $logger = $this->getResource('log');
         Zend_Registry::set('logger', $logger);
         $logger->info("application logger initialization done!");
-
-        unset($config);
         unset($logger);
-        unset($writer);
-        unset($filter);
-        unset($formatter);
     }
 
     /**
