@@ -1,14 +1,6 @@
 <?php
 
-require_once 'ZendTestHelper.php';
-// the helper script should get ready the $application.
-
-$bootstrap->bootstrap();
-// perform some Zend registerying work, which should happen in run() function.
-$config = new Zend_Config($application->getOptions());
-Zend_Registry::set('config', $config);
-//$db = Zend_Db::factory($config->resources->db);
-//Zend_Registry::set('db',$db);
+require 'ZendTestHelper.php';
 
 /**
  * a very simple test case.
@@ -19,6 +11,10 @@ class ZendBootstrapTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
 
+        $application = Zend_Registry::get('Zend_Application');
+        $application->getBootstrap()->bootstrap();
+        $config = new Zend_Config($application->getOptions());
+        Zend_Registry::set('config', $config);
     }
 
     public function testRegistry() {
