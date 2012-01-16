@@ -30,12 +30,13 @@ class ZendDbResourceTest extends PHPUnit_Framework_TestCase {
             $conn = $this->dbAdapter->getConnection();
             $this->logger->info('Connection to Database Sucess!');
             // get all available tables
-            $talbes = $conn->listTables();
+            $tables = $this->dbAdapter->listTables();
             if (empty($tables)) {
                 $this->logger->info("We got an empty database!");
+                $this->loadTestingData();
             } else {
                 $tableCount = count($tables);
-                $this->logger->info("There are " . $tableCount . "table(s)");
+                $this->logger->info("There are " . $tableCount . " table(s)");
                 $index = 0;
                 foreach ($tables as $tableName) {
                     $index = $index + 1;
@@ -49,5 +50,22 @@ class ZendDbResourceTest extends PHPUnit_Framework_TestCase {
         } catch (Zend_Exception $e) {
             $this->logger->err('Exception: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * load testing data,
+     */
+    protected function loadTestingData() {
+
+        // assume the database initial script is in scripts folder.
+        $dbSchemaSql = file_get_contents(APPLICATION_PATH . '/scripts/schema.sqlite.sql');
+        $this->logger->debug("Initial Schema for SQLite3 database: " . PHP_EOL .
+                             $dbSchemaSql);
+        $this->dbAdapter->getConnection()->exec($dbSchemaSql);
+
+        $dataSql = file_get_contents(APPLICATION_PATH . '/scripts/data.sqlite.sql');
+        $this->logger->debug("Initial data for SQLite3 database: " . PHP_EOL .
+                             $dataSql);
+        $this->dbAdapter->getConnection()->exec($dataSql);
     }
 }
