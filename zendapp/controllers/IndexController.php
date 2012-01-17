@@ -10,9 +10,7 @@ class IndexController extends Zend_Controller_Action {
 
         /* Initialize action controller here */
         $app = Zend_Registry::get('Zend_Application');
-        $bootstrap = $app->getBootstrap();
-        $bootstrap->bootstrap('db');
-        $this->_dbAdapter = $bootstrap->getResource('db');
+        $this->_dbAdapter = $app->getBootstrap()->getResource('db');
 
         $this->_logger = Zend_Registry::get('logger');
         
