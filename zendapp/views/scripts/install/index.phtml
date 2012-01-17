@@ -1,0 +1,20 @@
+
+<h1>Guestbook Installation Form</h1>
+
+<?php
+if ($this->tableExist) {
+?>
+  <p>Table exist! <a href="/zendapp/">Back to Homepage</a>.</p>
+<?php
+} else {
+  // $this will the view in the controller.
+  $this->form->setAction($this->url());
+  echo $this->form;
+}
+?>
+
+<h3>Schema SQL Statement</h3>
+<pre><?php echo $this->schemaSql; ?></pre>
+
+<h3>Intial Data</h3>
+<pre><?php echo $this->dataSql; ?></pre>
