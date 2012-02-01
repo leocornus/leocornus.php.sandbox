@@ -1,0 +1,13 @@
+<div id="gitstatus">
+  <h3>Git Console Page</h3>
+
+  <?php
+    // this the default way to render the form.
+    $this->statusForm->setAction($this->url());
+    echo $this->statusForm;
+  ?>
+
+  <h2>Result for <?php echo $this->action; ?></h2>
+  <pre><?php echo $this->rawResult; ?></pre>
+
+</div>
