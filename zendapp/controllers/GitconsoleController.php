@@ -16,22 +16,35 @@ class GitconsoleController extends Zend_Controller_Action {
         $statusForm = new Zendapp_Form_Gitstatus();
         $commitForm = new Zendapp_Form_Gitcommit();
         if ($request->isPost()) {
-            if ($statusForm->isValid($request->getPost())) {
-                $basePath = $statusForm->getValue('basePath');
-                $this->_logger->info("Change working directory to: " .
-                                     $basePath);
-                chdir($basePath);
-                if ($statusForm->getValue('checkStatus')) {
-                    $action = $statusForm->getValue('checkStatus');
-                    $rawResult = shell_exec('git status');
+            // get the submit button first to decide which form we are 
+            // working on?
+            if (array_key_exists('commit', $request->getPost())) {
+                // handle commit.
+                if ($commitForm->isValid($request->getPost())) {
                 }
-                if ($statusForm->getValue('checkLogs')) {
-                    $action = $statusForm->getValue('checkLogs');
-                    $rawResult = shell_exec('git log');
-                }
+            }
 
-                $this->view->action = $action;
-                $this->view->rawResult = $rawResult;
+            if (array_key_exists('checkStatus', $request->getPost()) ||
+                array_key_exists('checkLogs', $request->getPost())) {
+
+                // handle check status or logs.
+                if ($statusForm->isValid($request->getPost())) {
+                    $basePath = $statusForm->getValue('basePath');
+                    $this->_logger->info("Change working directory to: " .
+                                         $basePath);
+                    chdir($basePath);
+                    if ($statusForm->getValue('checkStatus')) {
+                        $action = $statusForm->getValue('checkStatus');
+                        $rawResult = shell_exec('git status');
+                    }
+                    if ($statusForm->getValue('checkLogs')) {
+                        $action = $statusForm->getValue('checkLogs');
+                        $rawResult = shell_exec('git log');
+                    }
+    
+                    $this->view->action = $action;
+                    $this->view->rawResult = $rawResult;
+                }
             }
         }
 
