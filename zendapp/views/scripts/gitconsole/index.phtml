@@ -7,14 +7,12 @@
     echo $this->statusForm;
   ?>
 
-  <h3>Fill out the following form to commit your change</h3>
+ <h3>Fill out the following form to commit your change</h3>
   <?php
     $this->commitForm->setAction($this->url());
-    echo $this->commitForm;
+    echo $this->commitForm->render();
   ?>
 
   <h3>Raw Result for <?php echo $this->action; ?></h3>
   <pre><?php echo $this->rawResult; ?></pre>
-
-
 </div>

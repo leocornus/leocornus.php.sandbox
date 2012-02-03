@@ -1,0 +1,53 @@
+<form action="<?php echo $this->escape($this->element->getAction()) ?>"
+  method="<?php echo $this->escape($this->element->getMethod()) ?>">
+  <?php 
+  $mBox = $this->element->getElement('modifieds');
+  $selectedValues = $mBox->getValue();
+  ?>
+
+  <table border="1"><tbody>
+    <tr><td colspan="3">
+      Plese select files to commit:
+      <?php 
+      // add the validation message here.
+      if ($mBox->hasErrors()) 
+          echo $this->formErrors($mBox->getMessages());
+      ?>
+    </td></tr>
+    <tr>
+      <th width="36">.</th>
+      <th>File Name</th>
+      <th>Status</th>
+    </tr>
+    <?php
+    foreach ($mBox->getMultiOptions() as $option=>$value) { 
+    ?>
+      <tr>
+        <td align="center">
+          <input type="checkbox" name="<?php echo $mBox->getName() ?>[]"
+            id="<?php echo $mBox->getName() ?>-<?php echo $option ?>" 
+            value="<?php echo $option ?>"
+            <?php 
+            if($selectedValues && in_array($option, $selectedValues))
+                echo 'checked="checked"';
+            ?>
+          /> 
+        </td>
+        <td><?php echo $value ?></td>
+        <td>N/A</td>
+      </tr>
+    <?php } ?>
+    <tr><td colspan="3">
+      Please fill out all the following fields to commit your change:
+    </td></tr>
+    <tr><td colspan="3">
+      <table><tbody>
+    <?php echo $this->element->authorName ?>
+    <?php echo $this->element->authorEmail ?>
+    <?php echo $this->element->accessKey ?>
+    <?php echo $this->element->comment ?>
+    <?php echo $this->element->commit ?>
+      </tbody></table>
+    </td></tr>
+  </tbody></table>
+</form>

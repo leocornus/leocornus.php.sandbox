@@ -15,6 +15,7 @@ class GitconsoleController extends Zend_Controller_Action {
         $request = $this->getRequest();
         $statusForm = new Zendapp_Form_Gitstatus();
         $commitForm = new Zendapp_Form_Gitcommit();
+
         if ($request->isPost()) {
             // get the submit button first to decide which form we are 
             // working on?
@@ -50,6 +51,9 @@ class GitconsoleController extends Zend_Controller_Action {
 
         $this->view->statusForm = $statusForm;
         $this->view->commitForm = $commitForm;
+        //$commitForm->setDecorators(array(
+        //    array('ViewScript', array('viewScript' => 'gitconsole/commitForm.phtml'))
+        //));
     }
 
     /**

@@ -19,10 +19,9 @@ class Zendapp_Form_Gitcommit extends Zend_Form {
             'label' => 'Modified Files, Select to Commit',
             'required' => true,
             'multiOptions' => array(
-                'file one' => 'File One',
-                'file two' => 'File Two'
+                'fileone' => 'File One',
+                'filetwo' => 'File Two'
                 ),
-            'decorators' => $aTableRow
             ));
 
         $name = $this->createElement('text', 'authorName', array(
@@ -77,9 +76,7 @@ class Zendapp_Form_Gitcommit extends Zend_Form {
             ));
 
         $this->setDecorators(array(
-                'FormElements',
-                array(array('data'=>'HtmlTag'), array('tag'=>'table')),
-                'Form'
+                array('ViewScript', array('viewScript' => 'gitconsole/commitForm.phtml'))
             ));
     }
 }
