@@ -1,9 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * a very simple test case.
  */
-class SimpleTest extends PHPUnit_Framework_TestCase {
+class SimpleTest extends TestCase {
 
     public function testAdd() {
 
