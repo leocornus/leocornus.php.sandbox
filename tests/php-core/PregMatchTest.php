@@ -18,7 +18,10 @@ class PregMatchTest extends TestCase {
         $matches = array();
 
         // perform the match
-        preg_match($pattern, $source, $matches);
+        $theReturn = preg_match($pattern, $source, $matches);
+
+        // we have found the match.
+        $this->assertTrue($theReturn === 1);
 
         // verify.
         // the first entry will always be the whole match.
