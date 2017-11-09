@@ -1,0 +1,3 @@
+#!/bin/sh
+/usr/dev/boilerplate/php/parts/php-build/bin/php /usr/dev/boilerplate/php/parts/php-build/bin/phpunit $@
+
