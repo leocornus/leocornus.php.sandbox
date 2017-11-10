@@ -27,6 +27,7 @@ class StrGetcsvTest extends TestCase {
         $this->assertEquals($result[1], '1');
         // empty column will be null
         $this->assertEquals($result[2], null);
+
         // we could use empty function to check.
         $this->assertTrue(empty($result[2]));
         $this->assertTrue(empty($result[5]));
