@@ -20,9 +20,11 @@ class NumberTest extends TestCase {
 
         // format number.
         $formatNumber = number_format($floatNumber, 2);
-
-
         // check the formated number.
         $this->assertEquals($formatNumber, "325,000.00");
+
+        // format number to integer.
+        $formatNumber = number_format($floatNumber, 0);
+        $this->assertEquals($formatNumber, "325,000");
     }
 }
