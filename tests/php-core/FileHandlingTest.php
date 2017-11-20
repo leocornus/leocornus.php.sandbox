@@ -20,7 +20,7 @@ class FileHandleTest extends TestCase {
 <?xml version="1.0" encoding="utf-8"?>
 <docs>
   <doc>
-    <Adress>1106 76th</Adress>
+    <Address>1106 76th</Address>
     <City>OAKLAND</City>
     <Province>CA</Province>
   </doc>
@@ -35,6 +35,6 @@ EOT;
         $theXML = simplexml_load_string($theContent);
 
         // check the formated number.
-        $this->assertEquals($theXML->doc->Adress, "1106 76th");
+        $this->assertEquals($theXML->doc->Address, "1106 76th");
     }
 }
