@@ -51,8 +51,17 @@ EOT;
         // NOTE: Element is case sensitive!
         $this->assertEquals($theXML->BoardID, "2");
         $this->assertEquals($theXML->ListingNumber, "40783548");
+
         //var_dump($theXML->Photo);
+        // multipile child elements will be mapped into array
+        $this->assertEquals(gettype($theXML->Photo), 'object');
+        $this->assertTrue(is_object($theXML->Photo));
+
+        // verify the first Photo element
         $this->assertEquals($theXML->Photo[0]->MainLink, "http://cdnparap30.paragonrels.com/ParagonImages/Property/P3/MAXEBRDI/40783548/0/0/0/3427d74baa0336da86b845344b16dcc1/63/a50384b1d17814b288aa7a851a6b0d5d/40783548.JPG");
         $this->assertEquals($theXML->Photo[0]->ThumbLink, "http://cdnparap30.paragonrels.com/ParagonImages/Property/P3/MAXEBRDI/40783548/0/0/0/3427d74baa0336da86b845344b16dcc1/63/a50384b1d17814b288aa7a851a6b0d5d/40783548.JPG");
+
+        // verify the last Photo.
+        $this->assertEquals($theXML->Photo[3]->Priority, "3");
     }
 }
