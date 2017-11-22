@@ -44,4 +44,36 @@ EOT;
         // remove the test file.
         $this->assertTrue(unlink($fileName));
     }
+
+    /**
+     * test save and read csv file.
+     */
+    public function testSaveReadCSV() {
+
+        // the testing file name.
+        $folder = dirname(__FILE__);
+        $fileName = "{$folder}/test.csv";
+
+        // the csv content.
+        $fileContent = <<<EOT
+123
+345
+4567
+12890134
+EOT;
+
+        // write to the file.
+        file_put_contents($fileName, $fileContent);
+
+        // read and process.
+        $readContent = file_get_contents($fileName);
+        $csvContent = preg_split('/\n\r|\n|\r/', $readContent);
+        //var_dump($csvContent);
+        $this->assertEquals($csvContent[0], '123');
+        $this->assertEquals($csvContent[2], '4567');
+        $this->assertEquals($csvContent[3], '12890134');
+
+        // remove the test file.
+        $this->assertTrue(unlink($fileName));
+    }
 }
