@@ -1,6 +1,6 @@
 <?php
 /**
- * test how PHP handle and manipulate files.
+ * simple test about how PHP handle and manipulate files.
  *
  *
  */
@@ -9,12 +9,16 @@ use PHPUnit\Framework\TestCase;
 
 class FileHandleTest extends TestCase {
 
+    /**
+     * test save and read xml files
+     */
     public function testSaveXMLFiles() {
 
         // we will save the file in the same folder.
         //$folder = basename(__DIR__); 
         $folder = dirname(__FILE__);
         $fileName = $folder . "/test.xml";
+
         //echo $fileName;
         $fileContent = <<<EOT
 <?xml version="1.0" encoding="utf-8"?>
@@ -36,5 +40,8 @@ EOT;
 
         // check the formated number.
         $this->assertEquals($theXML->doc->Address, "1106 76th");
+
+        // remove the test file.
+        $this->assertTrue(unlink($fileName));
     }
 }
