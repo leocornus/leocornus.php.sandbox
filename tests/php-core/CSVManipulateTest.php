@@ -32,4 +32,25 @@ class StrGetcsvTest extends TestCase {
         $this->assertTrue(empty($result[2]));
         $this->assertTrue(empty($result[5]));
     }
+
+
+    /**
+     * try to convert CSV to key/value array.
+     */
+    function testCSV2KeyValue() {
+
+        $rankingFile = '/usr/rd/AgentReva/files/ranking/NeighbourhoodData.csv';
+
+        $rankingCSV = file_get_contents($rankingFile);
+        $rankingsRows = preg_split('/\n\r|\n|\r/', $rankingCSV);
+        $rankings = [];
+        // shit the first row, which is header.
+        array_shift($rankingsRows);
+        foreach($rankingsRows as $row) {
+            $rankingRow = str_getcsv($row);
+            $rankings[$rankingRow[0]] = $row;
+        }
+
+        var_dump($rankings);
+    }
 }
