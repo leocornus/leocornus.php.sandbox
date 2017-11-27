@@ -12,6 +12,33 @@ use PHPUnit\Framework\TestCase;
 class NumberTest extends TestCase {
 
     /**
+     * calculate the EMI, estemated motgage payment.
+     */
+    function testCalcuateMonthlyPayment() {
+        $list = "325000.000000000";
+        $listValue = floatval($list);
+
+        $principal = $listValue - (listValue * 0.2);
+
+        $rate = 0.025 / 12; // interest rate of 2.5%
+        $months = 300; // 25 years ammortizaion
+
+        // Calculating principal assuming 20% Downpayment
+        $principal = $listValue - ($listValue * 0.2);
+
+        $roiComp = pow((1 + $rate), $months);
+
+        $roiCompNumer = $rate * $roiComp;
+        $roiCompDenom = $roiComp - 1;
+
+        $emi = $principal * ($roiCompNumer / $roiCompDenom);
+
+        $emi = ceil($emi);
+        $this->assertEquals($emi, 1167.0);
+        $this->assertEquals(number_format($emi, 2), "1,167.00");
+    }
+
+    /**
      * number_format will handle float number decimals and
      * some current format.
      */
