@@ -79,5 +79,6 @@ EOT;
         //var_dump($rankings);
         $this->assertEquals($rankings['Mimico'], 
                             ['Mimico',59,3,69,3,86,2,40,4,93,2,102,2,126,1,84,3,105,2,51,4]);
+        $this->assertEquals($rankings['Black Creek'][2], 1);
     }
 }
