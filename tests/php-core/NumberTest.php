@@ -57,6 +57,10 @@ class NumberTest extends TestCase {
         // format number to integer.
         $formatNumber = number_format($floatNumber, 0);
         $this->assertEquals($formatNumber, "325,000");
+
+        // string to int value.
+        $intNumber = intval($strNumber);
+        $this->assertEquals($intNumber, 325000);
     }
 
     /**
