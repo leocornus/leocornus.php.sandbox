@@ -13,4 +13,24 @@ use PHPUnit\Framework\TestCase;
 
 class ImageMetadataTest extends TestCase {
 
+    /** 
+     * try to get image type.
+     */
+    public function testImagetype() {
+
+        // assume the testing images are in the same folder.
+        $folder = dirname(__FILE__);
+        //echo $folder;
+        // file name is case sentive!
+        $imageFile = $folder . "/20140127.JPG";
+
+        // get the imageType
+        $imageType = exif_imagetype($imageFile);
+        
+        // 2 will be jpeg type.
+        $this->assertEquals($imageType, 2);
+
+        // full list of image types could be found on page:
+        // http://php.net/manual/en/function.exif-imagetype.php
+    }
 }
