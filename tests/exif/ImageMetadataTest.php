@@ -58,5 +58,13 @@ class ImageMetadataTest extends TestCase {
         $strDate = $exif['DateTimeOriginal'];
         $this->assertEquals(substr($strDate, 0, strlen('2014:01:27')), 
                             '2014:01:27');
+
+        // date for prefix 20170127
+        $prefixDate = str_replace(":", '', substr($strDate, 0, 10));
+        $this->assertEquals($prefixDate, '20140127');
+
+        // date for category 2017-01-27
+        $catDate = str_replace(":", '-', substr($strDate, 0, 10));
+        $this->assertEquals($catDate, '2014-01-27');
     }
 }
