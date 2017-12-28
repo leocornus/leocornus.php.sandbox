@@ -53,5 +53,10 @@ class ImageMetadataTest extends TestCase {
 
         // check the file name.
         $this->assertEquals($exif['FileName'], '20140127.JPG');
+
+        // process the date time.
+        $strDate = $exif['DateTimeOriginal'];
+        $this->assertEquals(substr($strDate, 0, strlen('2014:01:27')), 
+                            '2014:01:27');
     }
 }
