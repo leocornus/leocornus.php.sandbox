@@ -63,6 +63,10 @@ class ImageMetadataTest extends TestCase {
         $prefixDate = str_replace(":", '', substr($strDate, 0, 10));
         $this->assertEquals($prefixDate, '20140127');
 
+        // timestamp for prefix 20170127
+        $prefixDate = str_replace(":", '', $strDate);
+        $this->assertEquals($prefixDate, '20140127 054557');
+
         // date for category 2017-01-27
         $catDate = str_replace(":", '-', substr($strDate, 0, 10));
         $this->assertEquals($catDate, '2014-01-27');
