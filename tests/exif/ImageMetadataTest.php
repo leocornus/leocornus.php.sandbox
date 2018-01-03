@@ -101,6 +101,7 @@ class ImageMetadataTest extends TestCase {
     public function testPartialMetadata() {
 
         $exif = @exif_read_data(self::$partialExifImage);
+        $this->assertFalse(!$exif);
         print_r($exif);
 
         // check the file name.
