@@ -15,6 +15,10 @@ class ImageMetadataTest extends TestCase {
 
     // define the image file path.
     protected static $imageFile;
+    // image file which doesn't has exif data.
+    protected static $noneExifImage;
+    // image file which has partial exif data.
+    protected static $partialExifImage;
 
     public static function setUpBeforeClass() {
 
@@ -23,6 +27,10 @@ class ImageMetadataTest extends TestCase {
         //echo $folder;
         // file name is case sentive!
         self::$imageFile = $folder . "/20140127.JPG";
+        // image file which doesn't has exif data at all.
+        self::$noneExifImage = $folder. "/IMG_4020.PNG";
+        // image with some exif data but missing timestamp
+        self::$partialExifImage = $folder. "/IMG_4016.JPG";
     }
 
     /** 
@@ -38,6 +46,11 @@ class ImageMetadataTest extends TestCase {
 
         // full list of image types could be found on page:
         // http://php.net/manual/en/function.exif-imagetype.php
+
+        // try the image file without exif data.
+        $imageType = exif_imagetype(self::$noneExifImage);
+        // NOTE: we still can get the image type.
+        $this->assertEquals($imageType, 3);
     }
 
     /**
@@ -49,7 +62,7 @@ class ImageMetadataTest extends TestCase {
         //echo self::$imageFile;
         // Add the @ operator to ignore some errors.
         $exif = @exif_read_data(self::$imageFile);
-        print_r($exif);
+        //print_r($exif);
 
         // check the file name.
         $this->assertEquals($exif['FileName'], '20140127.JPG');
@@ -70,5 +83,37 @@ class ImageMetadataTest extends TestCase {
         // date for category 2017-01-27
         $catDate = str_replace(":", '-', substr($strDate, 0, 10));
         $this->assertEquals($catDate, '2014-01-27');
+    }
+
+    /**
+     * try to read a image witch has no exif data at all!
+     */
+    public function testGetNoMetadata() {
+
+        // Add the @ operator to ignore some errors.
+        $exif = @exif_read_data(self::$noneExifImage);
+        // the return will be FALSE, if there is no EXIF data.
+        $this->assertFalse($exif);
+    }
+
+    /**
+     */
+    public function testPartialMetadata() {
+
+        $exif = @exif_read_data(self::$partialExifImage);
+        print_r($exif);
+
+        // check the file name.
+        $this->assertEquals($exif['FileName'], 'IMG_4016.JPG');
+
+        // this one doesn't have DateTimeOriginal.
+        $strDate = $exif['DateTimeOriginal'];
+        $this->assertEquals($strDate, '');
+        $this->assertTrue(empty($strDate));
+
+        // the timestamp.
+        $timestamp = $exif['FileDateTime'];
+        $theDate = getDate($timestamp);
+        print_r($theDate);
     }
 }
