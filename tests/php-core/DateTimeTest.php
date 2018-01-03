@@ -18,6 +18,7 @@ class DateTimeTest extends TestCase {
 
         // get current date time.
         $now = getdate();
+        //print_r($now);
         // it will return an array:
         $this->assertEquals(gettype($now), 'array');
 
@@ -36,5 +37,23 @@ class DateTimeTest extends TestCase {
         // month January
         $this->assertEquals($endDate['month'], 'January');
         // day of month
+    }
+
+    /**
+     * basic date time format.
+     */
+    function testBasicDateTimeFormat() {
+
+        // using the timestamp when we build this test case
+        // as a datetime.
+        $timestamp = 1515002897;
+        $testDate = getdate($timestamp);
+        // it was 2018.
+        $this->assertEquals($testDate['year'], 2018);
+
+        // Now we try some different formats:
+
+        $str = strftime('%Y-%m-%d', $timestamp);
+        $this->assertEquals('2018-01-02', $str);
     }
 }
