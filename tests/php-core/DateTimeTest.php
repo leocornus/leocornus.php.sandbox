@@ -40,6 +40,25 @@ class DateTimeTest extends TestCase {
     }
 
     /**
+     * try to get understand the local.and timezone.
+     * 
+     * timezone could be set in php.ini:
+     * http://php.net/manual/en/datetime.configuration.php#ini.date.timezone
+     */
+    function testLocal() {
+
+        $currentLocal = setlocale(LC_ALL, 0);
+        $currentLocal = setlocale(LC_TIME, 0);
+        //print_r($currentLocal);
+
+        $timezone = date_default_timezone_get();
+        // the default timezone is UTC, the Coordinated Universal Time.
+        // https://www.timeanddate.com/time/aboututc.html
+        // basically the London, Engliand time.
+        $this->assertEquals('UTC', $timezone);
+    }
+
+    /**
      * basic date time format.
      */
     function testBasicDateTimeFormat() {
@@ -53,7 +72,24 @@ class DateTimeTest extends TestCase {
 
         // Now we try some different formats:
 
+        // FIXME: NOT WORKING!!!
+        // need set the local first.
+        //setlocale(LC_TIME, 'America/Toronto');
+        $timezone = date_default_timezone_set('America/Toronto');
         $str = strftime('%Y-%m-%d', $timestamp);
-        $this->assertEquals('2018-01-02', $str);
+
+        // America/Toronto is a valid timezone.
+        $this->assertTrue($timezone);
+        $this->assertEquals('2018-01-03', $str);
+
+        //$dateObjet = new DateTime($str, new DateTimeZone('UTC'));
+        // @ prefix is required when using the timestamp for DateTime object.
+        $dateObject = new DateTime('@' . $timestamp);
+        print_r($dateObject);
+        // this is actually UTC timezone.
+        $this->assertEquals($dateObject->timezone, '+00:00');
+
+        $dateObjet->setTimezone(new DateTimeZone('America/Toronto'));
+        $this->assertEquals('2018-01-03', $dateObject->format('Y-m-d'));
     }
 }
