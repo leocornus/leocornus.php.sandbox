@@ -16,7 +16,7 @@ class StringTest extends TestCase {
         $this->assertEquals($ret, "Hello world");
 
         // capitalize each word.
-        $ret = ucwords($src);
+        $ret = ucwords(strtolower($src));
         $this->assertEquals($ret, "Hello World");
     }
 }
