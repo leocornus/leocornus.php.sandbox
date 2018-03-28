@@ -18,7 +18,7 @@ class NumberTest extends TestCase {
         $list = "325000.000000000";
         $listValue = floatval($list);
 
-        $principal = $listValue - (listValue * 0.2);
+        $principal = $listValue - ($listValue * 0.2);
 
         $rate = 0.025 / 12; // interest rate of 2.5%
         $months = 300; // 25 years ammortizaion

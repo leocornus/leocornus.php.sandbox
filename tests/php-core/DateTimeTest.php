@@ -89,7 +89,7 @@ class DateTimeTest extends TestCase {
         // this is actually UTC timezone.
         $this->assertEquals($dateObject->timezone, '+00:00');
 
-        $dateObjet->setTimezone(new DateTimeZone('America/Toronto'));
+        $dateObject->setTimezone(new DateTimeZone('America/Toronto'));
         $this->assertEquals('2018-01-03', $dateObject->format('Y-m-d'));
     }
 }
