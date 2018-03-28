@@ -27,7 +27,7 @@ class StringTest extends TestCase {
         $aString = 'some interst things with';
 
         // the function str_replace.
-        $aRet = str_replace(' ', '', $aString);
+        $aRet = str_replace(' ', '', strtolower($aString));
         $this->assertEquals($aRet, "someinterstthingswith");
     }
 }
