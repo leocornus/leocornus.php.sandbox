@@ -19,4 +19,15 @@ class StringTest extends TestCase {
         $ret = ucwords(strtolower($src));
         $this->assertEquals($ret, "Hello World");
     }
+
+    /**
+     */
+    public function testReplace() {
+
+        $aString = 'some interst things with';
+
+        // the function str_replace.
+        $aRet = str_replace(' ', '', $aString);
+        $this->assertEquals($aRet, "someinterstthingswith");
+    }
 }
